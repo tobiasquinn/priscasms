@@ -15,7 +15,7 @@ class CMS(QtGui.QDialog):
         self.ui.labelNumber.setText(number)
 
     def _setMessage(self, message):
-        self.ui.labelMessage.setText(message)
+        self.ui.textEditMessage.setText(message)
 
 if __name__ == "__main__":
     import sys
