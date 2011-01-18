@@ -13,6 +13,7 @@ from PyQt4 import QtCore, QtGui
 
 from priscasms.ui.MainWindowUI import Ui_MainWindow
 from priscasms.ui.CMSDialog import CMS
+from priscasms.ui.PreferencesDialog import PreferencesDialog
 
 # out max message length
 MML = 160
@@ -64,6 +65,11 @@ class Main(QtGui.QMainWindow):
         if cms.exec():
             print("  TO:%s\nMESS:%s" % (self._getNumber(), self._getMessage()[:MML]))
 
+    def _preferences(self):
+        # display our preferences dialog and take appropriate action
+        prefsd = PreferencesDialog(self)
+        prefsd.exec()
+
     def __init__(self):
         self.settings = QtCore.QSettings()
         QtGui.QMainWindow.__init__(self)
@@ -79,20 +85,25 @@ class Main(QtGui.QMainWindow):
         self.hl = Highlight160(self.ui.textEditMessage.document())
         # read our settings
         self.ui.lineEditPhoneNumber.setText(self.settings.value("gui/number"))
+        self.ui.textEditMessage.setText(self.settings.value("gui/message"))
+        # menu bindings
+        self.connect(self.ui.actionPreferences, QtCore.SIGNAL('triggered()'), self._preferences)
+        self.connect(self.ui.actionQuit, QtCore.SIGNAL('triggered()'), self.close)
 
     def __del__(self):
         # write our settings
         self.settings.setValue("gui/number", self._getNumber())
+        self.settings.setValue("gui/message", self._getMessage())
 
 def main():
     app  = QtGui.QApplication(sys.argv)
     app.setOrganizationName("tobiasquinn.com")
-    app.setApplicationName("PriscaSMS")
+    app.setApplicationName("priscasms")
     #ss.setValue("sms/gateway", "tobias-debian32.local")
     window = Main()
     window.show()
     # exit on window close
-    app.exec()
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
