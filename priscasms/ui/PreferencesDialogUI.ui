@@ -111,7 +111,7 @@
   </connection>
   <connection>
    <sender>checkBoxSSH</sender>
-   <signal>clicked(bool)</signal>
+   <signal>toggled(bool)</signal>
    <receiver>label</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
@@ -127,7 +127,7 @@
   </connection>
   <connection>
    <sender>checkBoxSSH</sender>
-   <signal>clicked(bool)</signal>
+   <signal>toggled(bool)</signal>
    <receiver>lineEditSSHAddress</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
