@@ -1,0 +1,16 @@
+PriscaSMS
+Copyright 2011 Tobias Quinn <tobias@tobiasquinn.com>
+
+REQUIREMENTS:
+    Python 3 or newer
+    PyQT 4.8.2 or newer
+
+gammu configured to allow sending of sms from the desired phone.
+
+INSTALLATION:
+    Run 'python setup.py install' as root.
+
+FEATURES:
+    Editing of SMS
+    Calling gammu to send SMS on local or remote host (via ssh)
+
