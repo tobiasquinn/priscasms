@@ -14,8 +14,8 @@ setup(name='PriscaSMS',
         author_email="tobias@tobiasquinn.com",
         url="http://tobiasquinn.com/code/priscasms.html",
         packages=['priscasms', 'priscasms.ui'],
-        scripts=['priscasms/priscasms']
-        data_files=[('share/applications', ['priscasms.desktop'])]
+        scripts=['priscasms/priscasms'],
+        data_files=[('share/applications', ['priscasms.desktop'])],
         )
 
 # Cleanup
