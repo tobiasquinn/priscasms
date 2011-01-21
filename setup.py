@@ -8,7 +8,7 @@ os.system('make')
 shutil.copyfile('priscasms.py', 'priscasms/priscasms')
 
 setup(name='PriscaSMS',
-        version="0.01",
+        version="0.02",
         description="QT GUI to send SMS using gammu",
         author="Tobias Quinn",
         author_email="tobias@tobiasquinn.com",
