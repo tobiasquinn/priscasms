@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.1
+#!/usr/bin/env python
 
 # PriscaSMS (c) Tobias Quinn, <tobias@tobiasquinn.com>, GPLv3
 
