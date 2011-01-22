@@ -25,12 +25,12 @@ class ValidatePhoneNumber(QtGui.QValidator):
 
     def validate(self, qstr, pos):
         # Blank is acceptable
-        if qstr == '': return QtGui.QValidator.Acceptable, qstr, pos
+        if qstr == '': return QtGui.QValidator.Acceptable, pos
         # match on a regexp
         if self.regexp.match(qstr):
-            return QtGui.QValidator.Acceptable, qstr, pos
+            return QtGui.QValidator.Acceptable, pos
         else:
-            return QtGui.QValidator.Invalid, qstr, pos
+            return QtGui.QValidator.Invalid, pos
 
 class Highlight160(QtGui.QSyntaxHighlighter):
     def highlightBlock(self, message):
@@ -62,13 +62,13 @@ class Main(QtGui.QMainWindow):
 
     def _sendMessage(self):
         cms = CMS(self, self._getNumber(), self._getMessage()[:MML])
-        if cms.exec():
+        if cms.exec_():
             print("  TO:%s\nMESS:%s" % (self._getNumber(), self._getMessage()[:MML]))
 
     def _preferences(self):
         # display our preferences dialog and take appropriate action
         prefsd = PreferencesDialog(self)
-        prefsd.exec()
+        prefsd.exec_()
 
     def __init__(self):
         self.settings = QtCore.QSettings()
@@ -84,8 +84,8 @@ class Main(QtGui.QMainWindow):
         # highlight text over 160 chars
         self.hl = Highlight160(self.ui.textEditMessage.document())
         # read our settings
-        self.ui.lineEditPhoneNumber.setText(self.settings.value("gui/number"))
-        self.ui.textEditMessage.setText(self.settings.value("gui/message"))
+        self.ui.lineEditPhoneNumber.setText(self.settings.value("gui/number").toString())
+        self.ui.textEditMessage.setText(self.settings.value("gui/message").toString())
         # menu bindings
         self.connect(self.ui.actionPreferences, QtCore.SIGNAL('triggered()'), self._preferences)
         self.connect(self.ui.actionQuit, QtCore.SIGNAL('triggered()'), self.close)
@@ -103,7 +103,7 @@ def main():
     window = Main()
     window.show()
     # exit on window close
-    sys.exit(app.exec())
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
     main()
