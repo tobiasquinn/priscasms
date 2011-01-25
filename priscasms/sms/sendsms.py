@@ -10,6 +10,7 @@ class SendSMS:
         return "gammu savesms TEXT"
 
     def sendSMS(self, number, message, sshHost=None):
+        # return None on success or a string containg error message
         cmd = self._gammuCommand(number, message)
         print(cmd)
         if sshHost == None:
@@ -35,18 +36,19 @@ class SendSMS:
                 # otherwise the output should be handled as error condition
                 if rstr == "Enter message text and press ^D:\r\n":
                     print("Got WANTED string")
+                    # now we can send the desired message
+                    # this seems to need to ^D's for some reason
+                    chan.sendall(message + chr(0x04) + chr(0x04))
                 else:
                     print("Got UNWANTED string - error condition")
-            if w:
-                print("WRITE")
-            if e:
-                print("ERROR")
             if chan.recv_exit_status() != 0:
                 print("EXIT STATUS ERROR")
-                while chan.recv_stderr_ready():
-                    print(chan.recv_stderr(1024))
+            else:
+                print("EXIT STATUS OK")
+                rstr = None
             client.close()
             print("Closed")
+            return rstr
 
 if __name__ == '__main__':
     HOST = "tobias-debian32.local"
