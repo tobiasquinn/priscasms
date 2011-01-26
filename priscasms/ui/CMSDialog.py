@@ -22,5 +22,5 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     cms = CMS(None, "+447789993069", "However, there whom the guide to support, UUCP, MIT Chaosnet, and a software (and redistribute GNU free is more than just Not obstruct most of Unix).  There were")
     cms.show()
-    app.exec()
+    app.exec_()
 

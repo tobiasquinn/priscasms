@@ -26,7 +26,7 @@ class PreferencesDialog(QtGui.QDialog):
         #self.ui.checkBoxSSH.setChecked(self._settings.value("sms/sshmode", False type=bool)))
         # NOTE: this is a hack for pyqt4 version 4.8.2 which sould be fixed in 4.8.3
         self.ui.checkBoxSSH.setChecked(self._boolPrefValueLoad(self._settings.value("sms/sshmode", False)))
-        self.ui.lineEditSSHAddress.setText(self._settings.value("sms/sshaddress"))
+        self.ui.lineEditSSHAddress.setText(self._settings.value("sms/sshaddress").toString())
 
     def _result(self, result):
         if result == self.Accepted:
@@ -39,5 +39,5 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     prefsd = PreferencesDialog(None)
     prefsd.show()
-    app.exec()
+    app.exec_()
 
